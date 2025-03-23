@@ -1,48 +1,60 @@
-# Astro Starter Kit: Basics
+# Astro with Biome and Prettier on Devcontainer
+## 環境
+- Ubuntu on WSL2
+  - Docker
+- VSCode
+  - `Dev Containers`，`Remote Development`拡張機能をインストール
 
-```sh
-npm create astro@latest -- --template basics
-```
+**参考：[Dev Container on WSL2で開発環境構築](https://zenn.dev/ykdev/articles/14a108290e24f9)**
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## プロジェクトの実行方法
+ターミナルで`npm run dev -- --host`をするとVSCode画面の右下に`Open In Browser`が出るため，それをクリック
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ディレクトリ構造
+- `pages/index.astro`
+  - Webページのルート
+- `layouts/Layout.astro`
+  - ページ全体のレイアウトを調整している
+  - `<slot />`があることによって，`pages/index.astro`で`<Layout><Welcome /></Layout>`のように`<Welcome />`を埋め込むことができる
+- `components/Welcome.astro`
+  - `npm run dev -- --host`したときに表示されるページ
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 使っているライブラリ・フレームワーク
+### Astro
+- フロントエンドのビルドツール
+- テンプレートを作成
 
-## 🚀 Project Structure
+### Biome
+- リント + フォーマットツール
+  - ESLint + Prettierの代替ツール
+  - コードを整形してくれる
+  - ファイルを保存したときに自動で実行されるようにしている（`.vscode/settings.json`）
 
-Inside of your Astro project, you'll see the following folders and files:
+### Prettier
+- フォーマットツール
+- AstroはBiomeのフォーマッタが一部未対応のため，`.astro`ファイルのみPrettierでフォーマットする
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+### Tailwind CSS
+`.css`ファイルを用意せず，HTMLのクラス要素に直接スタイルを当てるためのフレームワーク
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 設定ファイル群
+### `.vscode/settings.json`
+- タブサイズをスペース2個分に指定
 
-## 🧞 Commands
+### `.npmrc`
+`npm install [library]`したときに，自動でバージョン固定オプション`--save-exact`を追加するように指定
 
-All commands are run from the root of the project, from a terminal:
+### `.devcontainer/devcontainer.json`
+- devcontainerの設定ファイル
+- `Node v22`と`GitHub CLI（GitHubの便利ツール）`，`Biome`と`Astro`を自動でインストールするように指定
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### `biome.json`
+Biomeの設定ファイル
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 初期設定
+1. [Dev Container on WSL2で開発環境構築](https://zenn.dev/ykdev/articles/14a108290e24f9)を参考に空ディレクトリをDevcontainerに用意
+2. Devcontainerの外（WSL）から[Vite 公式サイト](https://ja.vite.dev/guide/)を参考に`Vite + React + TypeScript`プロジェクト作成
+3. [Biome 公式サイト](https://biomejs.dev/ja/guides/getting-started/)を参考にインストール・init
+4. [Tailwind CSS 公式サイト](https://tailwindcss.com/docs/installation/using-vite)を参考にインストール
+5. [VSCodeでNext.jsのプロジェクトを作成した後にやることメモ(DevContainerとBiome.jsの設定)](https://zenn.dev/ikoamu/articles/e21d9665b6189e)を参考にDevContainerとBiome.jsの設定
+6. [package.jsonでのバージョン指定は完全固定にしよう](https://zenn.dev/nekoya/articles/c6057fbb896391)を参考に`.npmrc`ファイル作成
