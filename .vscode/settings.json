@@ -1,0 +1,16 @@
+{
+    "[astro]": {
+		"editor.defaultFormatter": "astro-build.astro-vscode"
+	},
+	"editor.formatOnSave": true,
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.codeActionsOnSave": {
+		"quickfix.biome": "explicit",
+		"source.organizeImports.biome": "explicit",
+        "source.fixAll.eslint": "explicit"
+	},
+    "editor.tabSize": 2,
+    "editor.quickSuggestions": {
+        "strings": true
+    }
+}
