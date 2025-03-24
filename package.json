@@ -1,5 +1,5 @@
 {
-	"name": "",
+	"name": "astro_with_biome_and_prettier_on_devcontainer",
 	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
